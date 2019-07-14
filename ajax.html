@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>
+            ajax test
+        </title>
+        <script>
+        var xmlhttp=false;
+        function ajax_call() {
+            try{
+            // Opera 8.0+, Firefox, Safari
+                xmlhttp = new XMLHttpRequest();
+            } catch (e){
+                // Internet Explorer Browsers
+                try{
+                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try{
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e){
+                        // Something went wrong
+                        alert("Your browser broke!");
+                        return false;
+                    }
+                }
+            }
+            xmlhttp.open("GET", 'https://www.tutorialspoint.com/ajax/ajaxWorks.php?num1=' +
+                            document.getElementById('num1').value +
+						    '&num2=' + document.getElementById('num2').value , true);
+            xmlhttp.onreadystatechange= function() {
+                if (xmlhttp.readyState==4) {
+                    document.getElementById('result').value = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.send(null)
+            return false;
+        }
+        </script>
+    </head>
+    <body>
+        <p><b>AJAX Example:</b></p>
+            <form name="form1" action="" onsubmit="return ajax_call()">
+                <input type="text" name="num1" id="num1"></input> *
+                <input type="text" name="num2" id="num2"></input> =
+                <input type="text" name="result" id="result"></input>
+                <input type="submit" name="semajax" value="AJAX"></input>
+            </form>
+    </body>
+</html>
+
