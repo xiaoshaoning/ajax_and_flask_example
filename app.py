@@ -12,7 +12,7 @@ def do_sum():
     num_2 = request.form['num2']
     output = str(int(num_1) * int(num_2))
     if num_1 and num_2:
-            return jsonify({'output':'Result: ' + output})
+            return jsonify({'output':output})
     return jsonify({'error':'Missing data!'})
 
 if __name__ == '__main__':
