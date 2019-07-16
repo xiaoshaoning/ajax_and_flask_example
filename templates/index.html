@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>
+            ajax test
+        </title>
+        <script src="/static/jquery-3.4.1.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('form').on('submit', function(event) {
+                    $.ajax({
+                        data : {
+                            num1: $('#num1').val(),
+                            num2: $('#num2').val(),
+                        },
+                        type : 'POST',
+                        url : '/process'
+                    })
+                    .done(function(data) {
+                        $('#output').text(data.output).show();
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <p><b>AJAX Example:</b></p>
+           <form class="form-inline">
+           <!--First Name-->
+           <div class="form-group">
+               <label class="sr-only" for="num1">First number</label>
+               <input type="text" class="form-control" id="num1" placeholder="">
+           </div>
+           <!--Last Name-->
+           <div class="form-group">
+               <label class="sr-only" for="num2">Second Name</label>
+               <input type="text" class="form-control" id="num2" placeholder="">
+           </div>
+
+           <!--Submit Button-->
+               <button type="submit" class="btn btn-default">Submit</button>
+           </form>
+
+           </br>
+               <div id="output"></div>
+           </br>
+    </body>
+</html>
+
