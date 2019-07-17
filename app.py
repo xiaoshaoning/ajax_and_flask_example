@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, jsonify
 from PIL import ImageFont, ImageDraw, Image
 import cv2
 import numpy as np
+import base64
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -32,7 +34,9 @@ def do_sum():
         cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
         cv2.imwrite("./static/result.png", cv2_im_processed)
 
-        return jsonify({'output':output})
+        with open("./static/result.png", "rb") as img_file:
+            image_string = base64.b64encode(img_file.read())
+            return jsonify({'output':output, 'image_string':str(image_string)})
     return jsonify({'error':'Missing data!'})
 
 if __name__ == '__main__':

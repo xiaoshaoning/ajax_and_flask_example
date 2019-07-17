@@ -19,8 +19,10 @@
                     .done(function(data) {
                         //$('#output').text(data.output).show();
                         //alert(data.output);
-                        $('#picture').html('<img src="/static/result.png" alt="result" />').show();
-
+                        //$('#picture').html('<img src="/static/result.png" alt="result" />').show();
+                        let image = new Image();
+                        image.src = 'data:image/png;base64,' + data.image_string.substring(2, data.image_string.length-1);
+                        $('#picture').html('<img src=' + image.src + ' alt="result" />').show();
                     });
                     event.preventDefault();
                 });
